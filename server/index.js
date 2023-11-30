@@ -4,6 +4,7 @@ import { config } from "dotenv";
 config();
 
 const app = express();
+app.use(express.json());
 
 //DB connection
 const db = mysql.createConnection({
@@ -20,11 +21,25 @@ app.get("/", (req, res) => {
   res.send("Hello from crud backend");
 });
 
+// get all books
 app.get("/books", (req, res) => {
   const q = "SELECT * FROM books";
   db.query(q, (err, data) => {
     if (err) return res.json("Something went wrong!");
     else res.json(data);
+  });
+});
+
+//create new book
+app.post("/books", (req, res) => {
+  //? mark on values provides security (values will be provided separately)
+  const q = "INSERT INTO books (`title`, `desc`, `cover`) VALUES(?)";
+  //   Values should be kept as an array
+  const values = [req.body.title, req.body.desc, req.body.cover];
+
+  db.query(q, [values], (err, data) => {
+    if (err) return res.json("Something went wrong!", err);
+    res.json("Book has been created successfully !");
   });
 });
 
