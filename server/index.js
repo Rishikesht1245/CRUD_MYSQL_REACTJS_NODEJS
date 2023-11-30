@@ -1,5 +1,6 @@
 import express from "express";
 import mysql from "mysql2";
+import cors from "cors";
 import { config } from "dotenv";
 config();
 
@@ -15,6 +16,13 @@ const db = mysql.createConnection({
   //    name of the schema
   database: "test",
 });
+
+// cors
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+  })
+);
 
 // test route
 app.get("/", (req, res) => {
@@ -33,12 +41,17 @@ app.get("/books", (req, res) => {
 //create new book
 app.post("/books", (req, res) => {
   //? mark on values provides security (values will be provided separately)
-  const q = "INSERT INTO books (`title`, `desc`, `cover`) VALUES(?)";
+  const q = "INSERT INTO books (`title`, `desc`, `price`,`cover`) VALUES(?)";
   //   Values should be kept as an array
-  const values = [req.body.title, req.body.desc, req.body.cover];
+  const values = [
+    req.body.title,
+    req.body.desc,
+    req.body.price,
+    req.body.cover,
+  ];
 
   db.query(q, [values], (err, data) => {
-    if (err) return res.json("Something went wrong!", err);
+    if (err) return res.status(403).json(err);
     res.json("Book has been created successfully !");
   });
 });
