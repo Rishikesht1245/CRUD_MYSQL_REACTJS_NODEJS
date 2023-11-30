@@ -17,6 +17,15 @@ const Books = () => {
 
     fetchAllBooks();
   }, []);
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:3000/books/${id}`);
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="flex flex-col items-center gap-10 p-4 h-full">
       <h1 className="text-blue-900 text-3xl uppercase font-black my-10">
@@ -36,11 +45,14 @@ const Books = () => {
             <p>{book?.desc}</p>
             <span>{book?.price}</span>
             <div className="flex gap-3 justify-center items-center">
-              <button className="bg-red-900 text-white font-semibold rounded-md px-2 py-1">
+              <button
+                className="bg-red-900 text-white font-semibold rounded-md px-2 py-1"
+                onClick={() => handleDelete(book?.id)}
+              >
                 Delete
               </button>
               <button className="bg-gray-700 text-white font-semibold rounded-md px-2 py-1">
-                Update
+                <Link to={`/update/${book?.id}`}>Update</Link>
               </button>
             </div>
           </div>

@@ -25,40 +25,49 @@ const AddBook = () => {
       navigate("/");
       setErrorMessage(null);
     } catch (error) {
-      setErrorMessage(error);
+      setErrorMessage("Something went wrong");
       console.log(error);
     }
   };
 
   return (
-    <div>
-      <h1>Add New Book</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="flex flex-col items-center justify-center">
+      <h1 className="my-10 text-blue-900 font-bold text-3xl">Add New Book</h1>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-1/3">
         <input
           type="text"
           placeholder="title"
           name="title"
           onChange={handleChange}
+          className="focus:outline-none border-none rounded-md px-2 py-2 text-slate-700"
         />
         <input
           type="text"
           placeholder="desc"
           name="desc"
           onChange={handleChange}
+          className="focus:outline-none border-none rounded-md px-2 py-2 text-slate-700"
         />
         <input
           type="number"
           placeholder="price"
           name="price"
           onChange={handleChange}
+          className="focus:outline-none border-none rounded-md px-2 py-2 text-slate-700"
         />
         <input
           type="text"
           placeholder="cover"
           name="cover"
           onChange={handleChange}
+          className="focus:outline-none border-none rounded-md px-2 py-2 text-slate-700"
         />
-        <button type="submit">Add</button>
+        <button
+          type="submit"
+          className="w-full bg-blue-900 text-white font-semibold rounded-md py-2 px-4"
+        >
+          Add
+        </button>
         {errorMessage && (
           <span className="text-red-700 font-semibold text-center tracking-wider">
             {errorMessage}
