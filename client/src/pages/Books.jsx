@@ -27,11 +27,11 @@ const Books = () => {
     }
   };
   return (
-    <div className="flex flex-col items-center gap-10 p-4 h-full">
-      <h1 className="text-blue-900 text-3xl uppercase font-black my-10">
+    <div className="flex flex-col items-center gap-7 p-4 h-full">
+      <h1 className="text-blue-900 text-3xl uppercase font-black my-5">
         Krithi Book Shop
       </h1>
-      <div className="flex gap-1 flex-wrap">
+      <div className="flex gap-5 flex-wrap">
         {books?.map((book) => (
           <div key={book?.id} className="flex-1 flex flex-col gap-2">
             {book?.cover && (
