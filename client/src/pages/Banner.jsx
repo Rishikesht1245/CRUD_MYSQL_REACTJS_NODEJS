@@ -16,10 +16,10 @@ const YourComponent = () => {
     position: "absolute",
     top: 0,
     left: 0,
-    width: "100%",
+    width: "70%",
     height: "100%",
     background: `url(${bgSVG})`,
-    backgroundPosition: "left",
+    backgroundPosition: "center",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
   };
@@ -30,10 +30,10 @@ const YourComponent = () => {
       <div style={bgStyle} className="w-full">
         <div
           style={bgSvgStyle}
-          className="flex items-center w-full lg:px-[200px]"
+          className="flex items-center w-full lg:p-[50px] 2xl:px-[200px] bg-tra"
         >
-          <div className="flex flex-col justify-center gap-4 text-white max-w-[400px]">
-            <h1 className="text-6xl uppercase break-words font-black">
+          <div className="flex flex-col justify-center gap-4 text-white w-[400px]">
+            <h1 className="text-6xl uppercase break-words font-black tracking-widest">
               Demand the Best!
             </h1>
             <div className="flex justify-center items-center max-w-[600px] px-auto">
