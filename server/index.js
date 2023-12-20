@@ -89,18 +89,9 @@ app.put("/books/:id", (req, res) => {
   });
 });
 
-app.post(
-  "/upload",
-  upload.single("banner"),
-  (req, res, next) => {
-    console.log(req.file); // getting undefined here
-    next();
-  },
-  processImage,
-  (req, res) => {
-    // Your logic here
-  }
-);
+app.post("/upload", upload.single("banner"), processImage, (req, res) => {
+  res.json("image uploaded successfully");
+});
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {

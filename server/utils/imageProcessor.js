@@ -6,7 +6,6 @@ export const processImage = async (req, res, next) => {
   if (!req.file) {
     next();
   }
-  console.log(req.body, "===processor");
   req.file.filename = `${req.body.title}_${Date.now()}.jpeg`;
   await sharp(req.file.buffer)
     .resize(320, 320)
