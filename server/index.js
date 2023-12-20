@@ -2,10 +2,13 @@ import express from "express";
 import mysql from "mysql2";
 import cors from "cors";
 import { config } from "dotenv";
+import { upload } from "./utils/imageUpload.js";
+import { processImage } from "./utils/imageProcessor.js";
 config();
 
 const app = express();
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 //DB connection
 const db = mysql.createConnection({
@@ -21,6 +24,7 @@ const db = mysql.createConnection({
 app.use(
   cors({
     origin: "http://localhost:5173",
+    credentials: true,
   })
 );
 
@@ -84,6 +88,19 @@ app.put("/books/:id", (req, res) => {
     return res.json("Book has been updated successfully");
   });
 });
+
+app.post(
+  "/upload",
+  upload.single("banner"),
+  (req, res, next) => {
+    console.log(req.file); // getting undefined here
+    next();
+  },
+  processImage,
+  (req, res) => {
+    // Your logic here
+  }
+);
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
