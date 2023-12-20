@@ -3,6 +3,7 @@ import Books from "./pages/Books";
 import AddBook from "./pages/AddBook";
 import UpdateBook from "./pages/UpdateBook";
 import ImageUpload from "./pages/ImageUpload";
+import Banner from "./pages/Banner";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route path="/add" element={<AddBook />} />
           <Route path="/update/:id" element={<UpdateBook />} />
           <Route path="/upload" element={<ImageUpload />} />
+          <Route path="/banner" element={<Banner />} />
         </Routes>
       </Router>
     </div>
