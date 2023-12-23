@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import RunningNumbers from "../components/AnimatedNumber";
 
 const Books = () => {
   const [books, setBooks] = useState([]);
@@ -63,6 +64,8 @@ const Books = () => {
       <button className="bg-blue-900 text-white font-semibold rounded-md px-4 py-2">
         <Link to={"/add"}>Add new book</Link>
       </button>
+
+      <RunningNumbers />
     </div>
   );
 };

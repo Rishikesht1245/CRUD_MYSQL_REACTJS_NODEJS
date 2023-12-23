@@ -1,37 +1,24 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const ImageUpload = () => {
-  const [formData, setFormData] = useState({
-    title: "",
-    banner: null,
-  });
+  const [title, setTitle] = useState("");
+  const [image, setImage] = useState(null);
 
   const [errorMessage, setErrorMessage] = useState(null);
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
+  const navigate = useNavigate();
 
   const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    setFormData({
-      ...formData,
-      banner: file,
-    });
+    const file = event?.target?.files[0];
+    setImage(file);
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const formDataForServer = new FormData();
-    formDataForServer.append("title", formData.title);
-    formDataForServer.append("banner", formData.banner);
-    console.log(formDataForServer);
-    console.log(formData, "===formdata");
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("banner", image);
     try {
       const res = await axios.post("http://localhost:3000/upload", formData);
       navigate("/");
@@ -51,8 +38,8 @@ const ImageUpload = () => {
           type="text"
           name="title"
           placeholder="title"
-          value={formData.title}
-          onChange={handleInputChange}
+          value={title}
+          onChange={(e) => setTitle(e?.target?.value)}
         />
         <button type="submit">Submit</button>
       </form>
