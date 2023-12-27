@@ -11,6 +11,6 @@ export const processImage = async (req, res, next) => {
     .resize(320, 320)
     .toFormat("jpeg")
     .jpeg({ quality: 80 })
-    .toFile(`assets/images/${req.file.filename}`);
+    .toFile(`./uploads/${req.file.filename}`);
   next();
 };

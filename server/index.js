@@ -33,6 +33,8 @@ app.get("/", (req, res) => {
   res.send("Hello from crud backend");
 });
 
+// Serving static files
+app.use("/uploads", express.static("uploads"));
 // get all books
 app.get("/books", (req, res) => {
   const q = "SELECT * FROM books";
@@ -89,7 +91,7 @@ app.put("/books/:id", (req, res) => {
   });
 });
 
-app.post("/upload", upload.single("banner"), processImage, (req, res) => {
+app.post("/upload_image", upload.single("banner"), processImage, (req, res) => {
   res.json("image uploaded successfully");
 });
 

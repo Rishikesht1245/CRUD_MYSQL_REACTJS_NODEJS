@@ -20,7 +20,10 @@ const ImageUpload = () => {
     formData.append("title", title);
     formData.append("banner", image);
     try {
-      const res = await axios.post("http://localhost:3000/upload", formData);
+      const res = await axios.post(
+        "http://localhost:3000/upload_image",
+        formData
+      );
       navigate("/");
       setErrorMessage(null);
     } catch (error) {
@@ -43,6 +46,11 @@ const ImageUpload = () => {
         />
         <button type="submit">Submit</button>
       </form>
+      <img
+        src="http://localhost:3000/uploads/imhg_1703697969092.jpeg"
+        alt="image"
+        className="w-40 h-40"
+      />
     </div>
   );
 };
